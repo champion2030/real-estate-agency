@@ -1,0 +1,37 @@
+{
+  "name": "real-estate-agency",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "tsoa:gen": "npx tsoa swagger -c src/nodes/restGateway/tsoa.json && npx tsoa routes -c src/nodes/restGateway/tsoa.json",
+    "start": "nodemon -x ts-node src/nodes/restGateway/app.ts",
+    "dev:fast": "sh ./scripts/dev-fast.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "consola": "^2.15.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-locale": "^2.0.0",
+    "express-useragent": "^1.0.15",
+    "lodash": "^4.17.21",
+    "method-override": "^3.0.0",
+    "mongodb": "^4.4.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "swagger-ui-express": "^4.3.0",
+    "tsoa": "^3.14.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.23",
+    "typescript": "^4.6.3"
+  }
+}
