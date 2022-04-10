@@ -12,13 +12,14 @@ import cors from 'cors';
 import { isShowDocs, restPort } from "./config";
 import { RegisterRoutes } from "./routes";
 import { removePropsDeep } from "../../utils/removePropsDeep";
-
+import { errorHandler } from "./middleware/errorHandler";
+import { mongoDBConnect } from "./middleware/mongoDB.connect";
 
 // ########################################################################
 // controllers need to be referenced in order to get crawled by the generator
 import './controllers/accounts.ctrl'
+import './controllers/auth.ctrl'
 
-// express.Request with Moleculer broker
 export type MRequest = express.Request & {
   useragent: {
     isMobile?: boolean;
@@ -81,28 +82,10 @@ const createApp = async () => {
     app.use(morgan(`:method :url :status :res[content-length] - :response-time ms`));
   }
 
-  // app.use((req: MRequest, res, next) => {
-  //
-  //   req.getAccountId = (): string | undefined => {
-  //     const { accountId } = req;
-  //
-  //     return accountId;
-  //   };
-  //
-  //   next();
-  // });
-  //
-  // app.use(setAccountId);
-  // app.use(setLastActivity);
-  // app.use(requestIp.mw());
+  await mongoDBConnect();
 
-  // app.use((req: MRequest, res, next) => {
-  //   const meta = req.ctx.meta;
-  //
-  //   req.ctx.meta = { ...meta, clientIp: req.clientIp };
-  //
-  //   next();
-  // });
+  // app.use(setAccountId);
+  // app.use(requestIp.mw());
 
   if (isShowDocs) {
     startSwagger(app);
@@ -110,7 +93,7 @@ const createApp = async () => {
 
   RegisterRoutes(app);
 
-  // app.use(errorHandler);
+  app.use(errorHandler);
 
   return app;
 };

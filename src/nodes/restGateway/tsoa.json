@@ -18,6 +18,7 @@
   "routes": {
     "basePath": "/",
     "routesDir": "./src/nodes/restGateway/",
+    "authenticationModule": "./src/nodes/restGateway/middleware/authentication.ts",
     "middleware": "express"
   },
   "compilerOptions": {

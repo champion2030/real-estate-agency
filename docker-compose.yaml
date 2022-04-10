@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  mongo:
+    image: mongo:latest
+    container_name: real_estate_agency_database
+    networks:
+      - dev_real_estate_agency
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "root"
+      MONGO_INITDB_DATABASE: "test"
+    volumes:
+      - mongodb_data_container:/data/db
+
+networks:
+  dev_real_estate_agency:
+
+volumes:
+  mongodb_data_container:

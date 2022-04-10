@@ -17,12 +17,14 @@ export const nodeName = process.env.NODE_NAME || `node-${os.hostname()}`;
 export const nodeID = `${nodeName}-${LOG_ENV}-${pid.toString()}-${new ObjectId().toString()}`;
 
 export const mongo = {
-  uri: process.env.MONGO_URI || 'mongodb://localhost:27017/data',
+  uri: process.env.MONGO_URI || 'mongodb://localhost:27017/',
   options: {
     useUnifiedTopology: true,
-    useCreateIndex: true,
     useNewUrlParser: true,
-    useFindAndModify: false,
+    autoIndex: true,
+    dbName: process.env.MONGO_DB_NAME || 'test',
+    user: process.env.MONGO_USER || 'root',
+    pass: process.env.MONGO_PASSWORD || 'root',
   },
 };
 
