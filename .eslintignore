@@ -1,0 +1,6 @@
+/src/types/**
+/dist/**
+/coverage/**
+/src/nodes/restGateway/swagger/**
+/src/nodes/restGateway/routes.ts
+node_modules

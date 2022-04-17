@@ -39,5 +39,8 @@ export const grantsObject = {
       'update:any': ['*'],
       'create:any': ['*'],
     },
+    accounts: {
+      'read:any': ['*'],
+    },
   },
 };

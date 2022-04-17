@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-len
 import { mongoConnect } from '../src/utils/mongo/connect';
-import { accountModel } from "../src/nodes/accounts/services/accounts/account.model";
+import { accountModel } from '../src/nodes/accounts/services/accounts/account.model';
 
 // eslint-disable-next-line max-len
 // npx ts-node -r tsconfig-paths/register migrates/createAccountCollection.ts

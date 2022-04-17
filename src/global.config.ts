@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import * as os from 'os';
-import { ObjectId } from "mongodb";
+import { ObjectId } from 'mongodb';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -37,7 +37,7 @@ export const log: any = {
 
 export const jwt = {
   secret: process.env.JWT_SECRET || 'super secret',
-  accessExpires: parseInt(process.env.JWT_ACCESS_EXPIRES, 10) || days60s,
+  accessExpires: parseInt(process.env.JWT_ACCESS_EXPIRES, 10) || days30s,
   refreshExpires: parseInt(process.env.JWT_REFRESH_EXPIRES, 10) || days60s,
 };
 

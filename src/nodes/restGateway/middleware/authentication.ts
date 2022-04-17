@@ -1,9 +1,10 @@
 import { MRequest } from '../app';
 import { AccessControl } from 'accesscontrol';
-import { INVALID_TOKEN, NOT_GRANTED } from "../../../errorCodes.config";
-import {accountModel} from "../../accounts/services/accounts/account.model";
-import { LogicError } from "../../../utils/LogicError";
-import { grantsObject } from "../../../roles.config";
+import { NOT_GRANTED } from '../../../errorCodes.config';
+import { accountModel } from '../../accounts/services/accounts/account.model';
+import { LogicError } from '../../../utils/LogicError';
+import { grantsObject } from '../../../roles.config';
+import { INVALID_TOKEN } from '../../accounts/errorCodes.config';
 
 const ac = new AccessControl(grantsObject);
 

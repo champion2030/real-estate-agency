@@ -5,8 +5,10 @@ import {
   ErrorResponse,
   mongooseErrorResponse,
   tsoaSyntaxErrorResponse,
-  tsoaValidateErrorResponse, typeErrorResponse, unknownErrorResponse
-} from "../../../utils/responses";
+  tsoaValidateErrorResponse,
+  typeErrorResponse,
+  unknownErrorResponse,
+} from '../../../utils/responses';
 
 export const errorHandler = async function (
   error: any,

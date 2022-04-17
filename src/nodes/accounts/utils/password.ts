@@ -1,18 +1,11 @@
-import { nanoid } from 'nanoid'
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcrypt';
 
-export const createPassword = (password: string) => {
-  const prefix = nanoid(8);
-  const salt = bcrypt.genSaltSync(10);
-  const bcryptHash = bcrypt.hashSync(password, salt);
+const salt = 'V1StGXR8_Z5jdHi6B-myT';
 
-  return prefix + bcryptHash;
+export const createPassword = async (password: string): Promise<string> => {
+  return bcrypt.hash(salt + password, 12);
 };
 
-export const checkPassword = (password: string, hash: string) => {
-  const prefix = hash.substring(0, 8);
-
-  const bcryptHash = bcrypt.compareSync(password, hash);
-
-  return hash === prefix + bcryptHash;
+export const checkPassword = async (password: string, hash: string): Promise<boolean> => {
+  return bcrypt.compare(salt + password, hash);
 };

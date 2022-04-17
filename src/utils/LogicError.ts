@@ -11,10 +11,10 @@ export class LogicError extends Error {
 
   constructor(errorCodeItem: ErrorCodeItem, data?: any) {
     const { message, type, code = 400 } = errorCodeItem;
+
     super(message);
     this.code = code;
     this.type = type;
     this.data = data;
   }
-
 }

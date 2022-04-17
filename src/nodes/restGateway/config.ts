@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { dropRight } from 'lodash';
 import path from 'path';
-import globalConfig from "../../global.config";
+import globalConfig from '../../global.config';
 
 dotenv.config({ path: '.env' });
 

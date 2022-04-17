@@ -1,7 +1,10 @@
 import { MRequest } from '../app';
 import { NextFunction, Response } from 'express';
-import { LogicError } from "../../../utils/LogicError";
-import { TOKEN_VERIFY_ERROR } from "../../accounts/errorCodes.config";
+import { LogicError } from '../../../utils/LogicError';
+import { TOKEN_VERIFY_ERROR } from '../../accounts/errorCodes.config';
+import { CheckTokenResponse } from '../../accounts/services/tokens/actions/checkToken';
+
+const TokenService = require('../../accounts/services/tokens/token.service');
 
 export const setAccountId = async (
   req: MRequest,
@@ -21,19 +24,11 @@ export const setAccountId = async (
       throw new LogicError(TOKEN_VERIFY_ERROR, { token });
     }
 
-    // const tokenData: CheckTokenResponse = await req.ctx.call('tokens.checkToken', {
-    //   token,
-    //   ...req.useragent,
-    // });
+    const tokenData: CheckTokenResponse = await TokenService.checkToken(token);
 
-    // добавляем в request accountId для использования в роутах
-    // if (typeof tokenData !== 'string') {
-    //   req.accountId = tokenData.accountId;
-    //
-    //   const account: AccountDoc = await req.ctx.call('accounts.get', { id: tokenData.accountId });
-    //
-    //   req.ctx.meta = { ...req.ctx.meta, accountId: tokenData.accountId, account };
-    // }
+    if (typeof tokenData !== 'string') {
+      req.accountId = tokenData.accountId;
+    }
     next();
   } catch (e) {
     req.accountId = undefined;
