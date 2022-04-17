@@ -12,7 +12,6 @@
     /* Specify the base directory to resolve non-relative module names. */
     "types": [
       "node",
-      "jest"
     ],
     "typeRoots": [
       "./node_modules/@types/"

@@ -11,7 +11,7 @@ const days30s = 2592000;
 const days60s = days30s * 2;
 
 export const LOG_ENV = process.env.LOG_ENV || 'local';
-export const env = process.env.NODE_ENV;
+export const env = process.env.NODE_ENV || 'development';
 export const { pid } = process;
 export const nodeName = process.env.NODE_NAME || `node-${os.hostname()}`;
 export const nodeID = `${nodeName}-${LOG_ENV}-${pid.toString()}-${new ObjectId().toString()}`;

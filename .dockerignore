@@ -7,5 +7,3 @@ docker-compose*
 .gitignore
 README.md
 .vscode
-src/nodes/restGateway/swagger/swagger.json
-src/nodes/restGateway/routes.ts
