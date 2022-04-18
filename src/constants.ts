@@ -1,0 +1,16 @@
+export enum PROPERTY_TYPE {
+  HOUSE = 'HOUSE',
+  FLAT = 'FLAT',
+  NON_RESIDENTIAL = 'NON_RESIDENTIAL',
+}
+
+export enum CLOSET_TYPE {
+  SEPARATE = 'SEPARATE',
+  COMMON = 'COMMON',
+}
+
+export enum HOUSE_MATERIAL_TYPE {
+  BRICK = 'BRICK',
+  CINDER_BLOCK = 'CINDER_BLOCK',
+  WOOD = 'WOOD',
+}

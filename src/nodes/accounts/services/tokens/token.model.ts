@@ -1,5 +1,6 @@
 import mongoose, { Model, Document } from 'mongoose';
 import { AbstractModel } from 'src/interfaces';
+import { jwt } from '../../../../global.config';
 
 export interface Token extends AbstractModel {
   _id?: string | null;
@@ -15,6 +16,7 @@ const tokenSchema = new mongoose.Schema(
     accountId: {
       type: String,
       required: true,
+      index: true,
     },
     os: {
       type: String,
@@ -41,6 +43,7 @@ const tokenSchema = new mongoose.Schema(
 );
 
 tokenSchema.index({ accountId: 1, token: 1 });
+tokenSchema.index({ updatedAt: 1 }, { expireAfterSeconds: jwt.refreshExpires });
 
 export interface TokenDoc extends Omit<Token, '_id'>, Document {}
 

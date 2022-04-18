@@ -3,6 +3,8 @@ import { MRequest } from '../app';
 import { RegistrationPostData } from './accounts.ctrl';
 import { Account } from '../../accounts/services/accounts/account.type';
 import { LoginResponse } from '../../accounts/services/tokens/actions/login';
+import { CheckTokenResponse } from '../../accounts/services/tokens/actions/checkToken';
+import { CreateTokensResponse } from '../../accounts/services/tokens/methods/createTokens';
 
 const AccountsService = require('../../accounts/services/accounts/accounts.service');
 const TokenService = require('../../accounts/services/tokens/token.service');
@@ -51,7 +53,10 @@ export class AuthController extends Controller {
    * @param req
    */
   @Get('/check/{token}')
-  async checkToken(@Request() req: MRequest, @Path('token') token: string) {
+  async checkToken(
+    @Request() req: MRequest,
+    @Path('token') token: string,
+  ): Promise<CheckTokenResponse> {
     return await TokenService.checkToken(token);
   }
 
@@ -61,7 +66,10 @@ export class AuthController extends Controller {
    * @param token
    */
   @Get('/refresh/{token}')
-  async refreshToken(@Request() req: MRequest, @Path('token') token: string) {
+  async refreshToken(
+    @Request() req: MRequest,
+    @Path('token') token: string,
+  ): Promise<CreateTokensResponse> {
     return await TokenService.refreshTokens({ token, ...req.useragent });
   }
 }
