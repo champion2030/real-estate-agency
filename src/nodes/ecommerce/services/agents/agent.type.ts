@@ -1,31 +1,33 @@
 import { AbstractModel, ID, IDs } from '../../../../interfaces';
 
 export interface Agent extends AbstractModel {
-  _id: ID;
-  accountId: ID;
-  email: string;
-  phone: string;
-  firstName: string;
-  middleName: string;
-  secondName: string;
+  _id?: ID | null;
+  accountId?: ID | null;
+  email?: string | null;
+  phone?: string | null;
+  firstName?: string | null;
+  middleName?: string | null;
+  secondName?: string | null;
   imageId?: string | null;
-  isActive: boolean;
-  rate?: AgentRate;
+  isActive?: boolean;
   publicContacts?: PublicContacts;
-  locations: Locations;
-}
-
-export interface AgentRate {
-  voteTimes?: number;
-  rating?: number;
+  description?: string | null;
 }
 
 export interface PublicContacts {
   phones?: IDs;
   emails?: IDs;
+  telegram?: string;
 }
 
-export interface Locations {
-  cities?: IDs;
-  districts?: IDs;
+export interface UpdateAgentParams {
+  email?: string | null;
+  phone?: string | null;
+  firstName?: string | null;
+  middleName?: string | null;
+  secondName?: string | null;
+  imageId?: string | null;
+  isActive?: boolean;
+  publicContacts?: PublicContacts;
+  description?: string | null;
 }

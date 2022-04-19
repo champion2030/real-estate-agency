@@ -1,4 +1,4 @@
-import { Route, Tags, Controller, Post, Request, Body, Get, Path } from 'tsoa';
+import { Route, Tags, Controller, Post, Request, Body, Get, Path, Query } from 'tsoa';
 import { MRequest } from '../app';
 import { RegistrationPostData } from './accounts.ctrl';
 import { Account } from '../../accounts/services/accounts/account.type';
@@ -71,5 +71,35 @@ export class AuthController extends Controller {
     @Path('token') token: string,
   ): Promise<CreateTokensResponse> {
     return await TokenService.refreshTokens({ token, ...req.useragent });
+  }
+
+  /**
+   * @summary аутентификация по логину (телефон) и паролю в админке
+   * @param req
+   * @param model
+   */
+  @Post('/login/admin')
+  async loginAdmin(@Request() req: MRequest, @Body() model?: LoginModel): Promise<LoginResponse> {
+    return await TokenService.login({
+      ...model,
+      ...req.useragent,
+      isAdmin: true,
+    });
+  }
+
+  /**
+   * @summary выход из системы - уничтожается действующий refreshToken
+   * @param token
+   * @param req
+   */
+  @Get('/logout')
+  async logout(@Request() req: MRequest, @Query('token') token?: string) {
+    this.setHeader('Set-Cookie', `accessToken=null; Path=/`);
+
+    if (token) {
+      return await TokenService.logout({ token });
+    }
+
+    return { msg: 'OK' };
   }
 }

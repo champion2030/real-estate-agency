@@ -1,10 +1,12 @@
 import { AbstractModel, ID, IDs } from '../../../../interfaces';
 import { CLOSET_TYPE, HOUSE_MATERIAL_TYPE, PROPERTY_TYPE } from '../../../../constants';
+import { MODERATION_STATUSES } from './constants';
 
 export interface RealEstate extends AbstractModel {
   _id?: ID | null;
   title?: string | null;
   agentId?: ID | null;
+  moderationStatus?: MODERATION_STATUSES;
   isActive?: boolean;
   description?: string | null;
   city?: ID | null;

@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 import { CLOSET_TYPE, HOUSE_MATERIAL_TYPE, PROPERTY_TYPE } from '../../../../constants';
 import { RealEstate } from './realEstate.type';
+import { MODERATION_STATUSES } from './constants';
 
 const realEstateSchema = new Schema(
   {
@@ -11,6 +12,12 @@ const realEstateSchema = new Schema(
     agentId: {
       type: Schema.Types.ObjectId,
       required: true,
+    },
+    moderationStatus: {
+      type: String,
+      enum: Object.values(MODERATION_STATUSES),
+      default: MODERATION_STATUSES.DRAFT,
+      index: true,
     },
     isActive: {
       type: Boolean,

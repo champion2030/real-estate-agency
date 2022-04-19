@@ -39,27 +39,13 @@ const agentSchema = new Schema(
     imageId: {
       type: Schema.Types.ObjectId,
     },
-    rate: {
-      rating: {
-        type: Number,
-        default: 0,
-      },
-      voteTimes: {
-        type: Number,
-        default: 0,
-      },
-    },
     publicContacts: {
       phones: [String],
       emails: [String],
+      telegram: String,
     },
-    locations: {
-      cities: {
-        type: [Schema.Types.ObjectId],
-      },
-      districts: {
-        type: [Schema.Types.ObjectId],
-      },
+    description: {
+      type: String,
     },
   },
   {
@@ -76,12 +62,12 @@ agentSchema.index({ secondName: 'text', firstName: 'text', middleName: 'text' })
 
 export interface AgentDoc extends Document, Omit<Agent, '_id'> {}
 
-export let schemaModel: Model<AgentDoc>;
+export let agentModel: Model<AgentDoc>;
 
 export const AGENTS_COLLECTION = 'Agent';
 
 try {
-  schemaModel = mongoose.model<AgentDoc>(AGENTS_COLLECTION);
+  agentModel = mongoose.model<AgentDoc>(AGENTS_COLLECTION);
 } catch (error) {
-  schemaModel = mongoose.model<AgentDoc>(AGENTS_COLLECTION, agentSchema);
+  agentModel = mongoose.model<AgentDoc>(AGENTS_COLLECTION, agentSchema);
 }

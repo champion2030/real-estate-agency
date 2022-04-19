@@ -69,3 +69,9 @@ export const ACCOUNT_NOT_FOUND = {
   code: 404,
   message: 'Аккаунт не найден',
 };
+
+export const ACCESS_DENIED = {
+  type: 'E_ACCESS_DENIED',
+  code: 401,
+  message: 'Доступ запрещен',
+};

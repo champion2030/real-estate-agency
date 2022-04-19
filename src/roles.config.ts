@@ -6,40 +6,37 @@ export enum ROLES {
 
 export const grantsObject = {
   admin: {
-    admin: {
-      'create:any': ['*'],
-      'read:any': ['*'],
-      'update:any': ['*'],
-      'delete:any': ['*'],
-    },
     accounts: {
       'create:any': ['*'],
       'read:any': ['*'],
       'update:any': ['*'],
       'delete:any': ['*'],
     },
-    agent: {
+    agents: {
       'read:any': ['*'],
       'update:any': ['*'],
       'create:any': ['*'],
+      'delete:any': ['*'],
     },
   },
 
   agent: {
-    agent: {
+    accounts: {
       'read:any': ['*'],
-      'update:any': ['*'],
-      'create:any': ['*'],
+      'update:own': ['*'],
+    },
+    agents: {
+      'read:any': ['*'],
+      'update:own': ['*'],
     },
   },
 
   user: {
-    user: {
-      'read:any': ['*'],
-      'update:any': ['*'],
-      'create:any': ['*'],
-    },
     accounts: {
+      'read:any': ['*'],
+      'update:own': ['*'],
+    },
+    agents: {
       'read:any': ['*'],
     },
   },
