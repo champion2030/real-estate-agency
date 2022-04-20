@@ -5,6 +5,7 @@ import { MODERATION_STATUSES } from './constants';
 export interface RealEstate extends AbstractModel {
   _id?: ID | null;
   title?: string | null;
+  accountId?: ID | null;
   agentId?: ID | null;
   moderationStatus?: MODERATION_STATUSES;
   isActive?: boolean;
@@ -33,4 +34,9 @@ export interface Area {
   total?: number;
   living?: number;
   kitchen?: number;
+}
+
+export interface UpsertEstate
+  extends Omit<RealEstate, 'agentId' | 'moderationStatus' | 'accountId'> {
+  _id?: ID | null;
 }

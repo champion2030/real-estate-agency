@@ -22,6 +22,8 @@ import { setAccountId } from './middleware/setAccountId';
 import './controllers/accounts.ctrl';
 import './controllers/auth.ctrl';
 import './controllers/agent.ctrl';
+import './controllers/user/realEstate.ctrl';
+import './controllers/admin/realEstate.ctrl';
 
 export type MRequest = express.Request & {
   useragent: {

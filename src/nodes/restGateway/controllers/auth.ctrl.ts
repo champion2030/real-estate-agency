@@ -1,6 +1,5 @@
 import { Route, Tags, Controller, Post, Request, Body, Get, Path, Query } from 'tsoa';
 import { MRequest } from '../app';
-import { RegistrationPostData } from './accounts.ctrl';
 import { Account } from '../../accounts/services/accounts/account.type';
 import { LoginResponse } from '../../accounts/services/tokens/actions/login';
 import { CheckTokenResponse } from '../../accounts/services/tokens/actions/checkToken';
@@ -12,6 +11,16 @@ const TokenService = require('../../accounts/services/tokens/token.service');
 export interface LoginModel {
   phone: string;
   password: string;
+}
+
+export interface RegistrationPostData {
+  email: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  password: string;
+  imageId?: string;
 }
 
 @Route('auth')

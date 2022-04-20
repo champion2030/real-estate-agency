@@ -6,16 +6,6 @@ import { Agent } from '../../ecommerce/services/agents/agent.type';
 const AccountsService = require('../../accounts/services/accounts/accounts.service');
 const AgentService = require('../../ecommerce/services/agents/agents.service');
 
-export interface RegistrationPostData {
-  email: string;
-  phone: string;
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  password: string;
-  imageId?: string;
-}
-
 @Route('accounts')
 @Tags('Accounts')
 export class AccountsController extends Controller {

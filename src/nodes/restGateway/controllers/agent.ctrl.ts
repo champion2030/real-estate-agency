@@ -4,16 +4,6 @@ import { Agent, UpdateAgentParams } from '../../ecommerce/services/agents/agent.
 
 const AgentService = require('../../ecommerce/services/agents/agents.service');
 
-export interface RegistrationPostData {
-  email: string;
-  phone: string;
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  password: string;
-  imageId?: string;
-}
-
 @Route('agent')
 @Tags('Agent')
 export class AgentController extends Controller {
@@ -21,7 +11,7 @@ export class AgentController extends Controller {
    * @summary Обновить информацию о текущем агенте
    */
   @Put('/info')
-  @Security('jwt', ['agents:updateOwn'])
+  @Security('jwt', ['agents:updateAny', 'agent:updateAny'])
   async updateInfo(@Request() req: MRequest, @Body() model?: UpdateAgentParams): Promise<Agent> {
     return await AgentService.updateByAgent({ accountId: req.accountId, ...model });
   }

@@ -1,7 +1,7 @@
 import { AccountDoc, accountModel } from '../account.model';
 import { LogicError } from '../../../../../utils/LogicError';
 import { ACCOUNT_EMAIL_EXIST, ACCOUNT_PHONE_EXIST } from '../../../errorCodes.config';
-import { RegistrationPostData } from '../../../../restGateway/controllers/accounts.ctrl';
+import { RegistrationPostData } from '../../../../restGateway/controllers/auth.ctrl';
 
 export const accountRegistration = async (account: RegistrationPostData): Promise<AccountDoc> => {
   const { email, phone } = account;

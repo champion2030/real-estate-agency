@@ -6,6 +6,12 @@ export enum ROLES {
 
 export const grantsObject = {
   admin: {
+    admin: {
+      'create:any': ['*'],
+      'read:any': ['*'],
+      'update:any': ['*'],
+      'delete:any': ['*'],
+    },
     accounts: {
       'create:any': ['*'],
       'read:any': ['*'],
@@ -17,27 +23,44 @@ export const grantsObject = {
       'update:any': ['*'],
       'create:any': ['*'],
       'delete:any': ['*'],
+    },
+    realEstate: {
+      'read:any': ['*'],
+      'update:any': ['*'],
+      'create:any': ['*'],
+      'delete:any': ['*'],
+    },
+    user: {
+      'read:any': ['*'],
+      'update:any': ['*'],
+      'create:any': ['*'],
     },
   },
 
   agent: {
+    agent: {
+      'read:any': ['*'],
+      'update:any': ['*'],
+      'create:any': ['*'],
+      'delete:any': ['*'],
+    },
     accounts: {
       'read:any': ['*'],
-      'update:own': ['*'],
+      'update:any': ['*'],
     },
-    agents: {
+    realEstate: {
       'read:any': ['*'],
-      'update:own': ['*'],
+      'update:any': ['*'],
+      'create:any': ['*'],
+      'delete:any': ['*'],
     },
   },
 
   user: {
-    accounts: {
+    user: {
       'read:any': ['*'],
-      'update:own': ['*'],
-    },
-    agents: {
-      'read:any': ['*'],
+      'update:any': ['*'],
+      'create:any': ['*'],
     },
   },
 };

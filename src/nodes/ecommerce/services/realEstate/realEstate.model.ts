@@ -9,9 +9,12 @@ const realEstateSchema = new Schema(
       type: String,
       text: true,
     },
+    accountId: {
+      type: Schema.Types.ObjectId,
+    },
     agentId: {
       type: Schema.Types.ObjectId,
-      required: true,
+      default: null,
     },
     moderationStatus: {
       type: String,
