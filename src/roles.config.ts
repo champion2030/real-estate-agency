@@ -34,6 +34,7 @@ export const grantsObject = {
       'read:any': ['*'],
       'update:any': ['*'],
       'create:any': ['*'],
+      'delete:any': ['*'],
     },
   },
 
@@ -42,17 +43,6 @@ export const grantsObject = {
       'read:any': ['*'],
       'update:any': ['*'],
       'create:any': ['*'],
-      'delete:any': ['*'],
-    },
-    accounts: {
-      'read:any': ['*'],
-      'update:any': ['*'],
-    },
-    realEstate: {
-      'read:any': ['*'],
-      'update:any': ['*'],
-      'create:any': ['*'],
-      'delete:any': ['*'],
     },
   },
 

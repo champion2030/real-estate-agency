@@ -2,8 +2,17 @@ import { AbstractModel, ID, IDs } from '../../../../interfaces';
 import { CLOSET_TYPE, HOUSE_MATERIAL_TYPE, PROPERTY_TYPE } from '../../../../constants';
 import { MODERATION_STATUSES } from './constants';
 
-export interface RealEstate extends AbstractModel {
+export interface RealEstate extends UpsertEstate, AbstractModel {
   _id?: ID | null;
+}
+
+export interface Area {
+  total?: number;
+  living?: number;
+  kitchen?: number;
+}
+
+export interface UpsertEstate {
   title?: string | null;
   accountId?: ID | null;
   agentId?: ID | null;
@@ -28,15 +37,4 @@ export interface RealEstate extends AbstractModel {
   floorNumber?: number | null;
   floorCount?: number | null;
   houseMaterial?: HOUSE_MATERIAL_TYPE;
-}
-
-export interface Area {
-  total?: number;
-  living?: number;
-  kitchen?: number;
-}
-
-export interface UpsertEstate
-  extends Omit<RealEstate, 'agentId' | 'moderationStatus' | 'accountId'> {
-  _id?: ID | null;
 }

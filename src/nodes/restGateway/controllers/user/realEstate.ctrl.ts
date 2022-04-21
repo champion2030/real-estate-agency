@@ -1,7 +1,6 @@
 import { Controller, Request, Route, Tags, Security, Post, Body, Put, Path } from 'tsoa';
 import { RealEstate, UpsertEstate } from '../../../ecommerce/services/realEstate/realEstate.type';
 import { MRequest } from '../../app';
-import { MODERATION_STATUSES } from '../../../ecommerce/services/realEstate/constants';
 
 const RealEstateService = require('../../../ecommerce/services/realEstate/realEstate.service');
 
@@ -9,7 +8,7 @@ const RealEstateService = require('../../../ecommerce/services/realEstate/realEs
 @Tags('User')
 export class UserRealEstateController extends Controller {
   /**
-   * @summary Добавить недавижимость для текущего пользователя
+   * @summary Добавить недавижимость текущего пользователя
    * @param req
    * @param estate - данные для создания
    */
@@ -23,7 +22,7 @@ export class UserRealEstateController extends Controller {
   }
 
   /**
-   * @summary Обновить недавижимость для текущего пользователя
+   * @summary Обновить недавижимость текущего пользователя
    * @param req
    * @param estateId - _id недвижимости для обновления
    * @param estate - данные для обновления
@@ -42,17 +41,26 @@ export class UserRealEstateController extends Controller {
   }
 
   /**
+   * @summary Вернуть недвижимость в статус черновика
+   */
+  @Put('/{estateId}/status/to/draft')
+  @Security('jwt', ['user:updateAny'])
+  async estateStatusToDraft(
+    @Request() req: MRequest,
+    @Path('estateId') estateId: string,
+  ): Promise<RealEstate> {
+    return await RealEstateService.estateToDraft(estateId, req.accountId);
+  }
+
+  /**
    * @summary Послать недвижимость на модерацию
    */
   @Put('/{estateId}/status/to/moderation')
   @Security('jwt', ['user:updateAny'])
   async estateStatusToModeration(
     @Request() req: MRequest,
-    @Path() estateId: string,
+    @Path('estateId') estateId: string,
   ): Promise<RealEstate> {
-    return await RealEstateService.updateEstateStatus({
-      estateId,
-      estateStatus: MODERATION_STATUSES.MODERATION,
-    });
+    return await RealEstateService.estateToModeration(estateId, req.accountId);
   }
 }

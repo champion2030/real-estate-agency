@@ -1,13 +1,13 @@
 import { Controller, Request, Route, Tags, Get, Security, Path, Post } from 'tsoa';
-import { MRequest } from '../app';
-import { Account } from '../../accounts/services/accounts/account.type';
-import { Agent } from '../../ecommerce/services/agents/agent.type';
+import { MRequest } from '../../app';
+import { Account } from '../../../accounts/services/accounts/account.type';
+import { Agent } from '../../../ecommerce/services/agents/agent.type';
 
-const AccountsService = require('../../accounts/services/accounts/accounts.service');
-const AgentService = require('../../ecommerce/services/agents/agents.service');
+const AccountsService = require('../../../accounts/services/accounts/accounts.service');
+const AgentService = require('../../../ecommerce/services/agents/agents.service');
 
-@Route('accounts')
-@Tags('Accounts')
+@Route('admin/accounts')
+@Tags('Admin')
 export class AccountsController extends Controller {
   /**
    * @summary получить по id
