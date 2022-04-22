@@ -124,3 +124,13 @@ export const mongooseErrorResponse = (error: any) => {
 
   return createError(400, errors);
 };
+
+export const createCustomListResponse = ({ rows, page, pageSize, total }) => {
+  return {
+    ...rows,
+    total,
+    page: page || 1,
+    pageSize: pageSize || 10,
+    totalPages: Math.ceil(total / (pageSize || 10)),
+  };
+};

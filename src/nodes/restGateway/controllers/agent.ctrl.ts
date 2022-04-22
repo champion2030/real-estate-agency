@@ -11,7 +11,7 @@ export class AgentController extends Controller {
    * @summary Обновить информацию о текущем агенте
    */
   @Put('/info')
-  @Security('jwt', ['agents:updateAny', 'agent:updateAny'])
+  @Security('jwt', ['agent:updateAny'])
   async updateInfo(@Request() req: MRequest, @Body() model?: UpdateAgentParams): Promise<Agent> {
     return await AgentService.updateByAgent({ accountId: req.accountId, ...model });
   }

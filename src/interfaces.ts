@@ -47,3 +47,11 @@ export interface MongooseUpdateMany {
   };
   operationTime: string;
 }
+
+export interface ListResponse<T> {
+  rows: T;
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}

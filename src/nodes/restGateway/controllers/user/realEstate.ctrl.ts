@@ -8,7 +8,7 @@ const RealEstateService = require('../../../ecommerce/services/realEstate/realEs
 @Tags('User')
 export class UserRealEstateController extends Controller {
   /**
-   * @summary Добавить недавижимость текущего пользователя
+   * @summary Добавить недавижимость
    * @param req
    * @param estate - данные для создания
    */
@@ -22,7 +22,7 @@ export class UserRealEstateController extends Controller {
   }
 
   /**
-   * @summary Обновить недавижимость текущего пользователя
+   * @summary Обновить недавижимость по _id
    * @param req
    * @param estateId - _id недвижимости для обновления
    * @param estate - данные для обновления

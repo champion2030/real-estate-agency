@@ -5,6 +5,7 @@ import { approveEstate } from './actions/approveEstate';
 import { estateToModeration } from './actions/estateToModeration';
 import { estateToDraft } from './actions/estateToDraftEstate';
 import { updateByAdmin } from './actions/updateByAdmin';
+import { getListOfEstates } from './actions/getListOfEstates';
 
 const realEstateActions = {
   createEstateDraftByUser,
@@ -14,6 +15,7 @@ const realEstateActions = {
   estateToModeration,
   estateToDraft,
   updateByAdmin,
+  getListOfEstates,
 };
 
 module.exports = realEstateActions;

@@ -24,6 +24,7 @@ import './controllers/admin/realEstate.ctrl';
 import './controllers/auth.ctrl';
 import './controllers/agent.ctrl';
 import './controllers/user/realEstate.ctrl';
+import './controllers/user/account.ctrl';
 
 export type MRequest = express.Request & {
   useragent: {
