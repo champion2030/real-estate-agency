@@ -1,6 +1,6 @@
 import { AgentDoc, agentModel } from '../agent.model';
 import { UpdateAgentParams } from '../agent.type';
-import { getByAccount } from './getByAccount';
+import { getAgentByAccount } from './getAgentByAccount';
 import { isNil, omitBy } from 'lodash';
 
 export const updateByAgent = async (
@@ -18,7 +18,7 @@ export const updateByAgent = async (
     accountId,
   } = params;
 
-  const foundAccountAgent: AgentDoc = await getByAccount(accountId);
+  const foundAccountAgent: AgentDoc = await getAgentByAccount(accountId);
 
   const dataToUpdate = omitBy(
     {

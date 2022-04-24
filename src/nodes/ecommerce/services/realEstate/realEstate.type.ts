@@ -1,5 +1,12 @@
 import { AbstractModel, ID, IDs } from '../../../../interfaces';
-import { CLOSET_TYPE, HOUSE_MATERIAL_TYPE, PROPERTY_TYPE } from '../../../../constants';
+import {
+  CITIES,
+  CLOSET_TYPE,
+  DISTRICTS,
+  HOUSE_MATERIAL_TYPE,
+  PROPERTY_TYPE,
+  TYPE_OF_DEAL,
+} from '../../../../constants';
 import { MODERATION_STATUSES } from './constants';
 
 export interface RealEstate extends UpsertEstate, AbstractModel {
@@ -19,9 +26,9 @@ export interface UpsertEstate {
   moderationStatus?: MODERATION_STATUSES;
   isActive?: boolean;
   description?: string | null;
-  city?: ID | null;
-  district?: ID | null;
-  streetOrAvenue?: ID | null;
+  city?: CITIES;
+  district?: DISTRICTS;
+  typeOfDeal?: TYPE_OF_DEAL;
   price?: number | null;
   photoId?: ID | null;
   morePhotoIds?: IDs | null;

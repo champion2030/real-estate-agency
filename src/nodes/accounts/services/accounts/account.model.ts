@@ -47,7 +47,7 @@ const accountSchema = new Schema(
     },
     isActive: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     favorites: {
       type: [Schema.Types.ObjectId],

@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 import { Agent } from './agent.type';
+import { AGENT_ROLES } from '../../../../constants';
 
 const agentSchema = new Schema(
   {
@@ -46,6 +47,11 @@ const agentSchema = new Schema(
     },
     description: {
       type: String,
+    },
+    role: {
+      type: String,
+      enum: Object.values(AGENT_ROLES),
+      default: AGENT_ROLES.AGENT,
     },
   },
   {

@@ -21,10 +21,11 @@ import { setAccountId } from './middleware/setAccountId';
 // controllers need to be referenced in order to get crawled by the generator
 import './controllers/admin/accounts.ctrl';
 import './controllers/admin/realEstate.ctrl';
-import './controllers/auth.ctrl';
-import './controllers/agent.ctrl';
-import './controllers/user/realEstate.ctrl';
+import './controllers/ecommerce/agent.ctrl';
 import './controllers/user/account.ctrl';
+import './controllers/user/agent.ctrl';
+import './controllers/user/realEstate.ctrl';
+import './controllers/auth.ctrl';
 
 export type MRequest = express.Request & {
   useragent: {

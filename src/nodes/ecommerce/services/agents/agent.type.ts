@@ -1,4 +1,5 @@
 import { AbstractModel, ID, IDs } from '../../../../interfaces';
+import { AGENT_ROLES } from '../../../../constants';
 
 export interface Agent extends AbstractModel {
   _id?: ID | null;
@@ -12,6 +13,7 @@ export interface Agent extends AbstractModel {
   isActive?: boolean;
   publicContacts?: PublicContacts;
   description?: string | null;
+  role?: AGENT_ROLES;
 }
 
 export interface PublicContacts {

@@ -3,7 +3,13 @@ import { RealEstate, UpsertEstate } from '../../../ecommerce/services/realEstate
 import { MRequest } from '../../app';
 import { ListResponse } from '../../../../interfaces';
 import { MODERATION_STATUSES } from '../../../ecommerce/services/realEstate/constants';
-import { HOUSE_MATERIAL_TYPE, PROPERTY_TYPE } from '../../../../constants';
+import {
+  CITIES,
+  DISTRICTS,
+  HOUSE_MATERIAL_TYPE,
+  PROPERTY_TYPE,
+  TYPE_OF_DEAL,
+} from '../../../../constants';
 
 const RealEstateService = require('../../../ecommerce/services/realEstate/realEstate.service');
 
@@ -33,9 +39,9 @@ export class AdminRealEstateController extends Controller {
    * @param agentId _id агента
    * @param moderationStatus статус
    * @param isActive
-   * @param citiId id города
-   * @param districtId id района
-   * @param streetOrAvenueId id улицы, проспекта
+   * @param city
+   * @param district
+   * @param typeOfDeal
    * @param priceFrom
    * @param priceTo
    * @param code код
@@ -48,7 +54,7 @@ export class AdminRealEstateController extends Controller {
    */
   @Get()
   @Security('jwt', ['realEstate:readAny'])
-  async list(
+  async listOfEstatesByAdmin(
     @Request() req: MRequest,
     @Query() page?: number,
     @Query() pageSize?: number,
@@ -57,9 +63,9 @@ export class AdminRealEstateController extends Controller {
     @Query() agentId?: string,
     @Query() moderationStatus?: MODERATION_STATUSES,
     @Query() isActive?: boolean,
-    @Query() citiId?: string,
-    @Query() districtId?: string,
-    @Query() streetOrAvenueId?: string,
+    @Query() city?: CITIES,
+    @Query() district?: DISTRICTS,
+    @Query() typeOfDeal?: TYPE_OF_DEAL,
     @Query() priceFrom?: number,
     @Query() priceTo?: number,
     @Query() code?: string,
@@ -78,9 +84,9 @@ export class AdminRealEstateController extends Controller {
       agentId,
       moderationStatus,
       isActive,
-      citiId,
-      districtId,
-      streetOrAvenueId,
+      city,
+      district,
+      typeOfDeal,
       priceFrom,
       priceTo,
       code,

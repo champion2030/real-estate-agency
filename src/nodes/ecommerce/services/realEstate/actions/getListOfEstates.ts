@@ -3,7 +3,13 @@ import { ListResponse } from '../../../../../interfaces';
 import { createCustomListResponse } from '../../../../../utils/responses';
 import { transformSort } from '../../../../../utils/transformSort';
 import { MODERATION_STATUSES } from '../constants';
-import { HOUSE_MATERIAL_TYPE, PROPERTY_TYPE } from '../../../../../constants';
+import {
+  CITIES,
+  DISTRICTS,
+  HOUSE_MATERIAL_TYPE,
+  PROPERTY_TYPE,
+  TYPE_OF_DEAL,
+} from '../../../../../constants';
 import { ObjectId } from 'mongodb';
 import { realEstateModel } from '../realEstate.model';
 import { RealEstate } from '../realEstate.type';
@@ -16,9 +22,9 @@ export interface GetListOfEstatesParams {
   agentId?: string;
   moderationStatus?: MODERATION_STATUSES;
   isActive?: boolean;
-  citiId?: string;
-  districtId?: string;
-  streetOrAvenueId?: string;
+  city?: CITIES;
+  district?: DISTRICTS;
+  typeOfDeal?: TYPE_OF_DEAL;
   priceFrom?: number;
   priceTo?: number;
   code?: string;
@@ -41,9 +47,9 @@ export const getListOfEstates = async (
     agentId,
     moderationStatus,
     isActive,
-    citiId,
-    districtId,
-    streetOrAvenueId,
+    city,
+    district,
+    typeOfDeal,
     priceFrom,
     priceTo,
     code,
@@ -55,7 +61,7 @@ export const getListOfEstates = async (
     houseMaterial,
   } = params;
   const offset = (page - 1) * pageSize;
-  const sortObject = transformSort(sort ?? '-updatedAt');
+  const sortObject = transformSort(sort ?? '-createdAt');
 
   const filter = omitBy(
     {
@@ -63,9 +69,9 @@ export const getListOfEstates = async (
       agentId: agentId ? new ObjectId(agentId) : null,
       moderationStatus,
       isActive,
-      citiId,
-      districtId,
-      streetOrAvenueId,
+      city,
+      district,
+      typeOfDeal,
       price:
         priceFrom || priceTo
           ? omitBy(

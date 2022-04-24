@@ -1,11 +1,13 @@
 import { createAgent } from './actions/createAgent';
-import { getByAccount } from './actions/getByAccount';
+import { getAgentByAccount } from './actions/getAgentByAccount';
 import { updateByAgent } from './actions/updateByAgent';
+import { getListOfAgents } from './actions/getListOfAgents';
 
 const agentsActions = {
   createAgent,
-  getByAccount,
+  getAgentByAccount,
   updateByAgent,
+  getListOfAgents,
 };
 
 module.exports = agentsActions;

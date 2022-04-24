@@ -1,5 +1,13 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
-import { CLOSET_TYPE, HOUSE_MATERIAL_TYPE, PROPERTY_TYPE } from '../../../../constants';
+import {
+  BUILDING_CONDITION,
+  CITIES,
+  CLOSET_TYPE,
+  DISTRICTS,
+  HOUSE_MATERIAL_TYPE,
+  PROPERTY_TYPE,
+  TYPE_OF_DEAL,
+} from '../../../../constants';
 import { RealEstate } from './realEstate.type';
 import { MODERATION_STATUSES } from './constants';
 
@@ -20,7 +28,6 @@ const realEstateSchema = new Schema(
       type: String,
       enum: Object.values(MODERATION_STATUSES),
       default: MODERATION_STATUSES.DRAFT,
-      index: true,
     },
     isActive: {
       type: Boolean,
@@ -31,13 +38,21 @@ const realEstateSchema = new Schema(
       text: true,
     },
     city: {
-      type: Schema.Types.ObjectId,
+      type: String,
+      enum: Object.values(CITIES),
     },
     district: {
-      type: Schema.Types.ObjectId,
+      type: String,
+      enum: Object.values(DISTRICTS),
+      index: true,
     },
-    streetOrAvenue: {
-      type: Schema.Types.ObjectId,
+    typeOfDeal: {
+      type: String,
+      enum: Object.values(TYPE_OF_DEAL),
+    },
+    buildingCondition: {
+      type: String,
+      enum: Object.values(BUILDING_CONDITION),
     },
     price: {
       type: Number,

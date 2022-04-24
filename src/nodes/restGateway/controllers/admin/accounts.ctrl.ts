@@ -4,6 +4,7 @@ import { Account } from '../../../accounts/services/accounts/account.type';
 import { Agent } from '../../../ecommerce/services/agents/agent.type';
 import { ROLES } from '../../../../roles.config';
 import { ListResponse } from '../../../../interfaces';
+import { AGENT_ROLES } from '../../../../constants';
 
 const AccountsService = require('../../../accounts/services/accounts/accounts.service');
 const AgentService = require('../../../ecommerce/services/agents/agents.service');
@@ -11,17 +12,6 @@ const AgentService = require('../../../ecommerce/services/agents/agents.service'
 @Route('admin/accounts')
 @Tags('Admin')
 export class AccountsController extends Controller {
-  /**
-   * @summary получить по id
-   * @param req
-   * @param id - _id сущности базы данных
-   */
-  @Get('{id}')
-  @Security('jwt', ['accounts:readAny'])
-  async get(@Request() req: MRequest, @Path('id') id: string): Promise<Account> {
-    return await AccountsService.getById(id);
-  }
-
   /**
    * @summary Создать агента
    * @param req
@@ -50,7 +40,7 @@ export class AccountsController extends Controller {
    */
   @Get()
   @Security('jwt', ['accounts:readAny'])
-  async list(
+  async listOfAccountsByAdmin(
     @Request() req: MRequest,
     @Query() page?: number,
     @Query() pageSize?: number,
@@ -71,5 +61,53 @@ export class AccountsController extends Controller {
       isAgent,
       role,
     });
+  }
+
+  /**
+   * @summary получить список всех агентов в системе
+   * @param req
+   * @param page номер страницы
+   * @param pageSize кол-во элементов на странице
+   * @param sort сортировка (filed или -field)
+   * @param accountId
+   * @param email почта
+   * @param phone телефон
+   * @param isActive
+   * @param role роль агента
+   */
+  @Get('/agents')
+  @Security('jwt', ['agents:readAny'])
+  async listOfAgentsByAdmin(
+    @Request() req: MRequest,
+    @Query() page?: number,
+    @Query() pageSize?: number,
+    @Query() sort?: string,
+    @Query() accountId?: string,
+    @Query() email?: string,
+    @Query() phone?: string,
+    @Query() isActive?: boolean,
+    @Query() role?: AGENT_ROLES,
+  ): Promise<ListResponse<Agent[]>> {
+    return await AgentService.getListOfAgents({
+      page,
+      pageSize,
+      sort,
+      accountId,
+      email,
+      phone,
+      isActive,
+      role,
+    });
+  }
+
+  /**
+   * @summary получить по id
+   * @param req
+   * @param id - _id сущности базы данных
+   */
+  @Get('{id}')
+  @Security('jwt', ['accounts:readAny'])
+  async get(@Request() req: MRequest, @Path('id') id: string): Promise<Account> {
+    return await AccountsService.getById(id);
   }
 }
