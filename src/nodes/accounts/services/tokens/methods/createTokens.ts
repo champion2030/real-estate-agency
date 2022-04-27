@@ -45,7 +45,11 @@ export const createTokens = async function (
     expiresIn: jwt.refreshExpires,
   });
 
-  await tokenModel.findOneAndDelete({ accountId });
+  const count = await tokenModel.countDocuments({ accountId });
+
+  if (count >= 10) {
+    await tokenModel.findOneAndDelete({ accountId }, { sort: { createdAt: 1 } });
+  }
 
   try {
     await tokenModel.create({

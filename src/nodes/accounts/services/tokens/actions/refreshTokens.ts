@@ -75,6 +75,8 @@ export const refreshTokens = async function (
       source,
     });
 
+    await tokenModel.deleteOne({ token: foundRefreshToken.token, accountId });
+
     return tokens;
   }
 
