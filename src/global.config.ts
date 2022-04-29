@@ -28,6 +28,11 @@ export const mongo = {
   },
 };
 
+export const redis = {
+  url: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
+  cacheDbNumber: parseInt(process.env.REDIS_CACHE_DB_NUMBER) || 4,
+};
+
 export const isHotReload = process.argv.indexOf('--hot') !== -1;
 
 export const log: any = {
@@ -41,6 +46,13 @@ export const jwt = {
   refreshExpires: parseInt(process.env.JWT_REFRESH_EXPIRES, 10) || days60s,
 };
 
+export const yandexObjectStorage = {
+  accessKey: process.env.S3_ACCESS_KEY || '',
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+  region: process.env.REGION || 'ru-central1',
+  bucket: process.env.BUCKET || '',
+};
+
 const globalConfig = {
   pid,
   nodeID,
@@ -49,6 +61,7 @@ const globalConfig = {
   log,
   jwt,
   isHotReload,
+  yandexObjectStorage,
 };
 
 export default globalConfig;

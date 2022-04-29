@@ -1,5 +1,26 @@
 version: "3.7"
 services:
+  redis:
+    image: redis:latest
+    networks:
+      - dev_real_estate_agency
+    command: [ 'redis-server', '--appendonly', 'yes' ]
+    container_name: redis
+    ports:
+      - "6379:6379"
+  redis-commander:
+      image: rediscommander/redis-commander:latest
+      networks:
+        - dev_real_estate_agency
+      restart: always
+      environment:
+        - REDIS_HOSTS=local:redis:6379
+        - HTTP_USER=admin
+        - HTTP_PASSWORD=admin
+      ports:
+        - "8081:8081"
+      depends_on:
+        - redis
   mongo:
     image: mongo:latest
     container_name: real_estate_agency_database
@@ -12,11 +33,6 @@ services:
       MONGO_INITDB_ROOT_USERNAME: "root"
       MONGO_INITDB_ROOT_PASSWORD: "root"
       MONGO_INITDB_DATABASE: "test"
-    volumes:
-      - mongodb_data_container:/data/db
 
 networks:
   dev_real_estate_agency:
-
-volumes:
-  mongodb_data_container:

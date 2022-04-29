@@ -43,3 +43,9 @@ export const NOT_GRANTED = {
   code: 403,
   message: 'Недостаточно прав для доступа к ресурсу',
 };
+
+export const FILE_NOT_FOUND = {
+  type: 'E_FILE_NOT_FOUND',
+  code: 404,
+  message: 'Файл не найден',
+};

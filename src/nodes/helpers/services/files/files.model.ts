@@ -3,7 +3,7 @@ import { File } from './file.type';
 
 const filesSchema = new Schema(
   {
-    accountId: {
+    owner: {
       type: Schema.Types.ObjectId,
       required: true,
     },

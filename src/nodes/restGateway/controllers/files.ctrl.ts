@@ -1,9 +1,11 @@
-import { Route, Controller, Tags, Post, Request } from 'tsoa';
+import { Route, Controller, Tags, Post, Request, Get, Path, Query } from 'tsoa';
 import { MRequest } from '../app';
 import { Readable } from 'stream';
 import multer from 'multer';
 import { LogicError } from '../../../utils/LogicError';
 import { FILE_NOT_CREATED } from '../../helpers/errorConfig';
+
+const FilesService = require('../../helpers/services/files/files.service');
 
 @Route('files')
 @Tags('Files')
@@ -37,24 +39,52 @@ export class FilesController extends Controller {
     stream.push(null);
 
     try {
-      // const fileId: string = await FilesService.upload(stream, {
-      //   meta: {
-      //     type: file.mimetype || '',
-      //     filename: file.originalname || '',
-      //     owner: req.accountId,
-      //   },
-      // });
-      //
-      // // eslint-disable-next-line no-console
-      // console.log(`file.blob.upload id: ${fileId}`);
-      //
-      // return fileId;
-      return;
+      const fileId: string = await FilesService.upload(stream, {
+        type: file.mimetype || '',
+        filename: file.originalname || '',
+        owner: req.accountId,
+      });
+
+      // eslint-disable-next-line no-console
+      console.log(`file.blob.upload id: ${fileId}`);
+
+      return fileId;
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log('cant upload files', err);
 
       throw new LogicError(FILE_NOT_CREATED, err.message);
     }
+  }
+
+  /**
+   * @summary загрузить изображение с сервера по ид с указанием размера
+   * @param id _id изображения
+   * @param req - объект запроса
+   * @param width - ширина изображение
+   * @param height - длина изображения
+   */
+  @Get('{id}/image/resize')
+  async getResized(
+    @Request() req: MRequest,
+    @Path('id') id: string,
+    @Query('width') width?: number,
+    @Query('height') height?: number,
+  ): Promise<any> {
+    const fileStream: Readable = await FilesService.downloadById({
+      id,
+      width,
+      height,
+    });
+
+    fileStream.pipe(req.res);
+    await new Promise<void>((resolve) => {
+      fileStream.on('end', () => {
+        req.res.end();
+        resolve();
+      });
+    });
+
+    return;
   }
 }
