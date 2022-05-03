@@ -13,8 +13,32 @@
     },
     "yaml": false,
     "specVersion": 3,
-    "specMerging": "recursive"
-  },
+    "specMerging": "recursive",
+    "spec": {
+      "paths": {
+        "/files/blob": {
+          "post": {
+            "requestBody": {
+              "required": true,
+              "content": {
+                "multipart/form-data": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "file": {
+                        "type": "string",
+                        "format": "binary"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+},
   "routes": {
     "basePath": "/",
     "routesDir": "./src/nodes/restGateway/",

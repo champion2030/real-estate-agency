@@ -2,7 +2,7 @@ import * as AWS from 'aws-sdk';
 import { yandexObjectStorage } from '../../../../../../global.config';
 import { Readable } from 'stream';
 
-class YandexStorage {
+export class YandexStorage {
   public readonly s3: AWS.S3;
 
   private readonly endpoint = 'https://s3.yandexcloud.net';
@@ -18,7 +18,7 @@ class YandexStorage {
     });
   }
 
-  public get(key: string): Readable {
+  async get(key: string): Promise<Readable> {
     return this.s3
       .getObject({
         Bucket: yandexObjectStorage.bucket,
@@ -27,31 +27,24 @@ class YandexStorage {
       .createReadStream();
   }
 
-  public upload(buffer: Buffer, key: string) {
-    return new Promise((resolve, reject) => {
-      this.s3.upload(
-        {
-          Bucket: yandexObjectStorage.bucket,
-          Key: key,
-          Body: buffer,
-          ContentType: this.contentType,
-        },
-        (err, result) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(result);
-          }
-        },
-      );
-    });
+  async upload(buffer: Buffer, key: string): Promise<any> {
+    return this.s3
+      .upload({
+        Bucket: yandexObjectStorage.bucket,
+        Key: key,
+        Body: buffer,
+        ContentType: this.contentType,
+      })
+      .promise();
   }
 
-  public delete(key: string) {
-    return this.s3.deleteObject({
-      Bucket: yandexObjectStorage.bucket,
-      Key: key,
-    });
+  public async delete(key: string): Promise<any> {
+    return this.s3
+      .deleteObject({
+        Bucket: yandexObjectStorage.bucket,
+        Key: key,
+      })
+      .promise();
   }
 }
 

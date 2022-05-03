@@ -1,4 +1,4 @@
-import { Route, Controller, Tags, Post, Request, Get, Path, Query } from 'tsoa';
+import { Route, Controller, Tags, Post, Request, Get, Path, Query, Delete } from 'tsoa';
 import { MRequest } from '../app';
 import { Readable } from 'stream';
 import multer from 'multer';
@@ -58,7 +58,7 @@ export class FilesController extends Controller {
   }
 
   /**
-   * @summary загрузить изображение с сервера по ид с указанием размера
+   * @summary загрузить изображение с сервера по id с указанием размера
    * @param id _id изображения
    * @param req - объект запроса
    * @param width - ширина изображение
@@ -86,5 +86,15 @@ export class FilesController extends Controller {
     });
 
     return;
+  }
+
+  /**
+   * @summary удалить файл с сервера по id
+   * @param id id файла
+   * @param req - объект запроса
+   */
+  @Delete('{id}')
+  async delete(@Request() req: MRequest, @Path('id') id: string): Promise<any> {
+    return await FilesService.deleteFileById(id);
   }
 }

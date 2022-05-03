@@ -20,7 +20,7 @@ export const upload = async (fileStream: Readable, params: UploadFileParams): Pr
 
   const fileBinary: Buffer = await getFileBinaryFromStream(fileStream);
 
-  await yandexStorage.upload(fileBinary, fileId);
+  await yandexStorage.upload(fileBinary, fileId.toString());
 
   return fileId;
 };

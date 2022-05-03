@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import * as os from 'os';
 import { ObjectId } from 'mongodb';
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 dotenv.config({ path: '.env' });
 
