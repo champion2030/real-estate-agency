@@ -2,9 +2,9 @@ import { LogicError } from '../../../../../utils/LogicError';
 import { AccountDoc, accountModel } from '../account.model';
 import { ACCOUNT_NOT_FOUND } from '../../../errorCodes.config';
 import { ObjectId } from 'mongodb';
-import { AccountInfo } from '../account.type';
+import { Account } from '../account.type';
 
-export const updateAsUser = async (params: AccountInfo, accountId: string): Promise<AccountDoc> => {
+export const updateAsAdmin = async (params: Account, accountId: string): Promise<AccountDoc> => {
   const account = await accountModel.findById(accountId).exec();
 
   if (!account) {

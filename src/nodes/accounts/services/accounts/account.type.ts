@@ -15,3 +15,12 @@ export interface Account extends AbstractModel {
   isActive: boolean;
   favorites?: IDs;
 }
+
+export interface AccountInfo {
+  email?: string | null;
+  phone?: number | null;
+  firstName?: string | null;
+  secondName?: string | null;
+  middleName?: string | null;
+  imageId?: string | null;
+}

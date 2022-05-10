@@ -1,4 +1,16 @@
-import { Controller, Request, Route, Tags, Get, Security, Path, Post, Query } from 'tsoa';
+import {
+  Controller,
+  Request,
+  Route,
+  Tags,
+  Get,
+  Security,
+  Path,
+  Post,
+  Query,
+  Put,
+  Body,
+} from 'tsoa';
 import { MRequest } from '../../app';
 import { Account } from '../../../accounts/services/accounts/account.type';
 import { Agent } from '../../../ecommerce/services/agents/agent.type';
@@ -109,5 +121,21 @@ export class AccountsController extends Controller {
   @Security('jwt', ['accounts:readAny'])
   async get(@Request() req: MRequest, @Path('id') id: string): Promise<Account> {
     return await AccountsService.getById(id);
+  }
+
+  /**
+   * @summary редактировать аккаунт по id
+   * @param req
+   * @param id - _id аккаунта
+   * @param model - данные для обновления
+   */
+  @Put('{id}')
+  @Security('jwt', ['accounts:updateAny'])
+  async update(
+    @Request() req: MRequest,
+    @Path('id') id: string,
+    @Body() model?: Account,
+  ): Promise<Account> {
+    return await AccountsService.updateAsAdmin(model, id);
   }
 }

@@ -1,15 +1,7 @@
 import { Controller, Route, Tags, Request, Get, Security, Put, Body, Path, Delete } from 'tsoa';
 import { MRequest } from '../../app';
-import { Account } from '../../../accounts/services/accounts/account.type';
+import { Account, AccountInfo } from '../../../accounts/services/accounts/account.type';
 
-export interface AccountInfo {
-  email?: string | null;
-  phone?: number | null;
-  firstName?: string | null;
-  secondName?: string | null;
-  middleName?: string | null;
-  imageId?: string | null;
-}
 const AccountsService = require('../../../accounts/services/accounts/accounts.service');
 
 @Route('user')
@@ -27,7 +19,7 @@ export class AccountInfoController extends Controller {
   /**
    * @summary обновить данные аккаунта
    * @param req
-   * @param model
+   * @param model - данные для обновления
    */
   @Put('/info')
   @Security('jwt', ['user:updateAny'])
