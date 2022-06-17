@@ -28,6 +28,8 @@ export const mongo = {
   },
 };
 
+export const rabbitMQ = process.env.RABBITMQ_URL || 'amqp://127.0.0.1:4222';
+
 export const redis = {
   url: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
   cacheDbNumber: parseInt(process.env.REDIS_CACHE_DB_NUMBER) || 4,

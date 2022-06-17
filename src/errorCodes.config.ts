@@ -49,3 +49,9 @@ export const FILE_NOT_FOUND = {
   code: 404,
   message: 'Файл не найден',
 };
+
+export const MESSAGE_NOT_FOUND_TO_CONSUME = {
+  type: 'E_MESSAGE_NOT_FOUND_TO_CONSUME',
+  code: 404,
+  message: 'Сообщение не найдено для получения',
+};

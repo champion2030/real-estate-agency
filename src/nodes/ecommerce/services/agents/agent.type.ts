@@ -33,3 +33,10 @@ export interface UpdateAgentParams {
   publicContacts?: PublicContacts;
   description?: string | null;
 }
+
+export enum AgentsQueues {
+  CREATE_AGENT = 'agents.createAgent',
+  GET_AGENT_BY_ACCOUNT = 'agents.getAgentByAccount',
+  GET_LIST_OF_AGENTS = 'agents.getListOfAgents',
+  UPDATE_BY_AGENT = 'agents.updateByAgent',
+}
